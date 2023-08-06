@@ -9,8 +9,8 @@ public class FinishParticle : MonoBehaviour
    public Transform StarParticle;
    private void Start()
    {
-      transform.DOMoveY(transform.position.y + 4, 5).OnComplete(() => Destroy(gameObject));
-      StarParticle.transform.DOLocalMoveX(4f, 5);
+      transform.DOMoveY(transform.position.y + 5, 4).OnComplete(() => Destroy(gameObject));
+      StarParticle.transform.DOLocalMoveX(4f, 4);
    }
 
    private void Update()
