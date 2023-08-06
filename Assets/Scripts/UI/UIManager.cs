@@ -1,18 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+   
+    public UIGameEnd UIGameEnd;
+
+    private void Start()
     {
-        
+        GamePlayManager.instance.OnLevelSuccess += OnLevelComplete;
+        GamePlayManager.instance.OnLevelFail += OnLevelFail;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnLevelComplete()
     {
-        
+        UIGameEnd.Initilaize(true);
+    }
+    public void OnLevelFail()
+    {
+        UIGameEnd.Initilaize(false);
+    }
+
+    private void OnDestroy()
+    {
+        GamePlayManager.instance.OnLevelSuccess -= OnLevelComplete;
     }
 }

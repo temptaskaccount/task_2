@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   ColorData: {fileID: 11400000, guid: dbbe3d39557237c4d924d91b4857b75b, type: 2}
-  LevelLength: 20
+  LevelLength: 5

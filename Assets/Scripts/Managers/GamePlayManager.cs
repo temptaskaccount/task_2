@@ -1,18 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GamePlayManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    
+     
+    #region Instance
+    
+    public static GamePlayManager instance;
+
+    private void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(this);
+            return;
+        }
+        instance = this;
+    }
+    #endregion
+    
+    public UnityAction OnLevelSuccess;
+    public UnityAction OmLevelStart;
+    public UnityAction OnLevelFail;
+
+    public void LevelStart()
+    {
+        OmLevelStart?.Invoke();
+    }
+    public void LevelSucces()
+    {
+        OnLevelSuccess?.Invoke();
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LevelFail()
     {
-        
+        OnLevelFail?.Invoke();
     }
 }

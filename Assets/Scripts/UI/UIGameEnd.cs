@@ -1,18 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIGameEnd : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject SuccesPanel,FailPanel;
+    public void Initilaize(bool IsSucces)
     {
+        StartCoroutine(WaitABit());
+        IEnumerator WaitABit()
+        {
+                
+            yield return new WaitForSeconds(1f);
+            if (IsSucces)
+            {
+                SuccesPanel.gameObject.SetActive(true);
+                
+            }
+            else
+            {
+                FailPanel.gameObject.SetActive(true);
+            }
+        }
+    }
+
+
+    public void OnClickNextLevel()
+    {
+     
+     
+        GamePlayManager.instance.LevelStart();
+        SuccesPanel.gameObject.SetActive(false);
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnClickFail()
     {
-        
+        SceneManager.LoadScene(0);
     }
 }

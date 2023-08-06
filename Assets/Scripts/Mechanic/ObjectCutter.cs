@@ -19,10 +19,10 @@ public class ObjectCutter : MonoBehaviour
         instance = this;
     }
     #endregion
+    public GameObject CutObjectPrefab;
 
     public void CutObject(bool Isleft,float distance,GameObject _sended)
     {
-        _sended = gameObject;
         float cutSize = distance;
         
         Vector3 startScale = _sended.transform.localScale;
@@ -30,7 +30,10 @@ public class ObjectCutter : MonoBehaviour
         Vector3 startPosition = _sended.transform.position;
         
         
-        GameObject generated = Instantiate(_sended);
+        
+        GameObject generated = Instantiate(CutObjectPrefab);
+        
+        generated.GetComponent<MeshRenderer>().material = _sended.GetComponent<MeshRenderer>().material;
         
         generated.transform.localScale = new Vector3(cutSize, startScale.y , startScale.z );
         
