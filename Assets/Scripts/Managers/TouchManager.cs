@@ -28,4 +28,9 @@ public class TouchManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
             OnTouch?.Invoke();
     }
+
+    private void OnDestroy()
+    {
+        OnTouch = null;
+    }
 }

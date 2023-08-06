@@ -33,21 +33,19 @@ public class Platform : MonoBehaviour
        
        if (Difference >= transform.localScale.x)
        {
-           GenerateFailTrigger();
-           gameObject.AddComponent<ObjectDropper>();
+           NoReachedFail();
            return;
        }
 
 
        if (Difference < 0.25f)
        {
-          transform.position = new Vector3(OtherPlatform.position.x, transform.position.y, transform.position.z);
-          Instantiate(Coin,transform.position + new Vector3(0,1f,0),Quaternion.identity);
-           SoundManager.instance.SuccesPlatform();
+           SuccessPlace();
        }
        else
        { 
            SoundManager.instance.ResetCombo();
+           
            if (transform.localScale.x - Difference < 0.3f)
            {
                GenerateFailTrigger();
@@ -60,6 +58,20 @@ public class Platform : MonoBehaviour
        }
        PlatformGenerator.instance.PlatformApply();
        PlatformGenerator.instance.RequestPlatform();
+       TouchManager.instance.OnTouch -= CheckPlatfrorm;
+   }
+
+   private void SuccessPlace()
+   {
+       transform.position = new Vector3(OtherPlatform.position.x, transform.position.y, transform.position.z);
+       Instantiate(Coin, transform.position + new Vector3(0, 1f, 0), Quaternion.identity);
+       SoundManager.instance.SuccesPlatform();
+   }
+
+   private void NoReachedFail()
+   {
+       GenerateFailTrigger();
+       gameObject.AddComponent<ObjectDropper>();
        TouchManager.instance.OnTouch -= CheckPlatfrorm;
    }
 
