@@ -28,8 +28,9 @@ public class UIGameEnd : MonoBehaviour
 
     public void OnClickNextLevel()
     {
-     
-     
+
+
+        DataManager.LevelIndex++;
         GamePlayManager.instance.LevelStart();
         SuccesPanel.gameObject.SetActive(false);
         

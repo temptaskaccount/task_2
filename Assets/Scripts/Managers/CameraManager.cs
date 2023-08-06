@@ -8,6 +8,7 @@ public class CameraManager : MonoBehaviour
 {
      public CinemachineVirtualCamera followCamera;
      public CinemachineVirtualCamera succesCamera;
+     
      CinemachineTrackedDolly dolly;
      private Coroutine _coroutine;
 
@@ -16,6 +17,7 @@ public class CameraManager : MonoBehaviour
           dolly =   succesCamera.GetCinemachineComponent<CinemachineTrackedDolly>();
           GamePlayManager.instance.OnLevelSuccess += ActivateSuccesCamera;
           GamePlayManager.instance.OmLevelStart += ActiveFollowCamera;
+          GamePlayManager.instance.OnLevelFail += DeActiveCameras;
      }
 
      Coroutine _cameraCoroutine;
@@ -45,5 +47,18 @@ public class CameraManager : MonoBehaviour
                followCamera.gameObject.SetActive(true);
                succesCamera.gameObject.SetActive(false);
           }
+     }
+
+     public void DeActiveCameras()
+     {
+          followCamera.gameObject.SetActive(false);
+          succesCamera.gameObject.SetActive(false);
+     }
+
+     private void OnDestroy()
+     {
+          GamePlayManager.instance.OnLevelSuccess -= ActivateSuccesCamera;
+          GamePlayManager.instance.OmLevelStart -= ActiveFollowCamera;
+          GamePlayManager.instance.OnLevelFail -= DeActiveCameras;
      }
 }

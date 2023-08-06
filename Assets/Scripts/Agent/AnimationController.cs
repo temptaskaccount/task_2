@@ -7,6 +7,7 @@ public class AnimationController : MonoBehaviour
 {
 
     public Animator animator;
+   
 
     public void Dance()
     {
@@ -18,7 +19,7 @@ public class AnimationController : MonoBehaviour
         animator.SetTrigger("Move");
     }
 
-    public void Idle()
+    public void Fail()
     {
         animator.SetTrigger("Fail");
 

@@ -495,6 +495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 2
+  DanceParticle: {fileID: 4965394220902498532, guid: 37511ce84f352b440a5d80717a67742a, type: 3}
 --- !u!114 &545224090879893852
 MonoBehaviour:
   m_ObjectHideFlags: 0

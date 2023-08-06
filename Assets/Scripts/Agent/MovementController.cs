@@ -9,6 +9,7 @@ public class MovementController : MonoBehaviour
     public float Speed;
     bool Move = false;
     AnimationController animationController;
+    public GameObject DanceParticle;
 
     private void Start()
     {
@@ -44,7 +45,8 @@ public class MovementController : MonoBehaviour
     public void Fail()
     {
         Move = false;
-        animationController.Idle();
+        transform.DOMoveY(-20, 10f);
+        animationController.Fail();
     }
     public void MoveFinishArea()
     {
@@ -52,6 +54,7 @@ public class MovementController : MonoBehaviour
             {
                 Move = false;
                 animationController.Dance();
+                Instantiate(DanceParticle,transform.position,Quaternion.identity,transform);
                 
             });
     }

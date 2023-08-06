@@ -8,6 +8,8 @@ public class Platform : MonoBehaviour
    public Transform OtherPlatform;
    private Vector3 moveDir;
    private bool IsMove;
+   public GameObject FailTrigger;
+   public GameObject Coin;
    public void Initilaize(Transform BeforePlatform)
    {
        OtherPlatform = BeforePlatform;
@@ -31,8 +33,8 @@ public class Platform : MonoBehaviour
        
        if (Difference >= transform.localScale.x)
        {
+           GenerateFailTrigger();
            gameObject.AddComponent<ObjectDropper>();
-           GamePlayManager.instance.LevelFail();
            return;
        }
 
@@ -40,6 +42,7 @@ public class Platform : MonoBehaviour
        if (Difference < 0.25f)
        {
           transform.position = new Vector3(OtherPlatform.position.x, transform.position.y, transform.position.z);
+          Instantiate(Coin,transform.position + new Vector3(0,1f,0),Quaternion.identity);
            SoundManager.instance.SuccesPlatform();
        }
        else
@@ -47,7 +50,7 @@ public class Platform : MonoBehaviour
            SoundManager.instance.ResetCombo();
            if (transform.localScale.x - Difference < 0.3f)
            {
-               GamePlayManager.instance.LevelFail();
+               GenerateFailTrigger();
                gameObject.AddComponent<ObjectDropper>();
                return;
            }
@@ -60,6 +63,11 @@ public class Platform : MonoBehaviour
        TouchManager.instance.OnTouch -= CheckPlatfrorm;
    }
 
+   void GenerateFailTrigger()
+   {
+       var created = Instantiate(FailTrigger);
+       created.transform.position = new Vector3(OtherPlatform.position.x, transform.position.y, transform.position.z);
+   }
    public void InitilaizeMaterial(Material mat)
    {
        GetComponent<MeshRenderer>().material = mat;
