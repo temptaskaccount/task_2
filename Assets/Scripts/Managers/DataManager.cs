@@ -14,10 +14,10 @@ public class DataManager
     public static Action OnCurrencyUpdate;
     public static int Currency
     {
-        get => PlayerPrefs.GetInt("LevelIndexKey", 0);
+        get => PlayerPrefs.GetInt("CurrencyKey", 0);
         set
         {
-            PlayerPrefs.SetInt("LevelIndexKey", value);
+            PlayerPrefs.SetInt("CurrencyKey", value);
             OnCurrencyUpdate?.Invoke();
         }
 
